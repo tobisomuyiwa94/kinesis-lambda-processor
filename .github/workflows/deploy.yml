@@ -29,3 +29,4 @@ jobs:
             --template-file template.yaml \
             --stack-name kinesis-lambda-processor-stack \
             --capabilities CAPABILITY_IAM
+
