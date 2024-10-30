@@ -3,8 +3,8 @@ name: Deploy to AWS Lambda
 on:
   push:
     branches:
-      - main  # Change this to match your production branch name
-      - dev   # Change this to match your development branch name
+      - main  # Change this to your production branch
+      - dev   # Add other branches as needed
 
 jobs:
   deploy:
@@ -17,12 +17,12 @@ jobs:
       - name: Set up AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  aws-region: us-east-1  # Set to your preferred AWS region
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1  # Specify your AWS region
 
       - name: Deploy to Lambda
-        run:
+        run: |
           aws cloudformation deploy \
             --template-file template.yaml \
             --stack-name kinesis-lambda-processor-stack \
