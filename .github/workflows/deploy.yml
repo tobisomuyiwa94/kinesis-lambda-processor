@@ -3,8 +3,12 @@ name: Deploy to AWS Lambda
 on:
   push:
     branches:
-      - main  # Change this to your production branch
-      - dev   # Add other branches as needed
+      - main
+      - dev
+
+permissions:
+  id-token: write
+  contents: read
 
 jobs:
   deploy:
@@ -14,12 +18,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up AWS credentials
+      - name: Configure AWS credentials from OIDC
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::tobisomuyiwa94:role/CI_CD_DeployRole
+          aws-region: us-east-1  # Replace with your preferred AWS region
 
       - name: Deploy to Lambda
         run: |
