@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - dev
 
 permissions:
   id-token: write
@@ -21,8 +20,8 @@ jobs:
       - name: Configure AWS credentials from OIDC
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::tobisomuyiwa94:role/CI_CD_DeployRole
-          aws-region: us-east-1  # Replace with your preferred AWS region
+          role-to-assume: arn:aws:iam::672189244218:role/CI_CD_DeployRole
+          aws-region: us-east-1
 
       - name: Deploy to Lambda
         run: |
